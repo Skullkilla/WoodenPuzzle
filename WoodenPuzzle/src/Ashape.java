@@ -12,7 +12,7 @@ public class Ashape extends Shape {
 	public boolean IsOutOfBounds(int x, int y){
 		if (x < 0 || y<0 || x>grid.width || y>grid.height)
 			return true;
-		else return false;
+		 return false;
 			
 	}
 
@@ -22,6 +22,7 @@ public class Ashape extends Shape {
 		if ( IsOutOfBounds(x,y-1) && grid.grid[x][y-1].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x][y-1].parent;
 			blocks[0].y -= 1;
+			tmp.blocks[0].y = y;
 			grid.grid[x][y-1] = blocks[0];
 			grid.grid[x][y] = tmp.blocks[0];
 			return true;
@@ -36,6 +37,7 @@ public class Ashape extends Shape {
 		if (IsOutOfBounds(x,y+1) && grid.grid[x][y+1].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x][y+1].parent;
 			blocks[0].y += 1;
+			tmp.blocks[0].y = y;
 			grid.grid[x][y+1] = blocks[0];
 			grid.grid[x][y] = tmp.blocks[0];
 			return true;
@@ -50,6 +52,7 @@ public class Ashape extends Shape {
 		if (IsOutOfBounds(x-1,y) && grid.grid[x-1][y].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x-1][y].parent;
 			blocks[0].x -= 1;
+			tmp.blocks[0].x = x;
 			grid.grid[x-1][y]= blocks[0];
 			grid.grid[x][y]=tmp.blocks[0];
 			return true;
@@ -64,6 +67,7 @@ public class Ashape extends Shape {
 		if (IsOutOfBounds(x+1,y) && grid.grid[x+1][y].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x+1][y].parent;
 			blocks[0].x += 1;
+			tmp.blocks[0].x = x;
 			grid.grid[x+1][y]= blocks[0];
 			grid.grid[x][y]=tmp.blocks[0];
 			return true;
