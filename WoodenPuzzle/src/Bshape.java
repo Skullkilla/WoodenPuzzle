@@ -6,6 +6,13 @@ public class Bshape extends Shape {
 		blocks[0] = new Block(x, y, this);
 		blocks[1] = new Block(x + 1, y, this);
 	}
+	
+	public boolean IsOutOfBounds(int x, int y){
+		if (x < 0 || y<0 || x>grid.width || y>grid.height)
+			return true;
+		else return false;
+			
+	}
 
 	@Override
 	public boolean MoveUp() {
