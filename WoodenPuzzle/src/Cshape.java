@@ -19,18 +19,12 @@ public class Cshape extends Shape {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
 		if (OutOfBounds(x, y - 1)
-				&& grid.grid[x][y - 1].parent.letter.equals("E")
-				&& grid.grid[x + 1][y - 1].parent.letter.equals("E")) {
+				&& grid.grid[x][y - 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x][y - 1].parent;
-			Eshape tmp2 = (Eshape) grid.grid[x + 1][y - 1].parent;
 			blocks[0].y -= 1;
-			blocks[1].y -= 1;
 			grid.grid[x][y - 1] = blocks[0];
-			grid.grid[x + 1][y - 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x + 1][y] = tmp.blocks[1];
 			tmp.blocks[0].y = y;
-			tmp2.blocks[0].y = y;
 			return true;
 		}
 		return false;
@@ -41,18 +35,12 @@ public class Cshape extends Shape {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
 		if (OutOfBounds(x, y + 1)
-				&& grid.grid[x][y + 1].parent.letter.equals("E")
-				&& grid.grid[x + 1][y + 1].parent.letter.equals("E")) {
+				&& grid.grid[x][y + 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x][y + 1].parent;
-			Eshape tmp2 = (Eshape) grid.grid[x + 1][y + 1].parent;
 			blocks[0].y += 1;
-			blocks[1].y += 1;
 			grid.grid[x][y + 1] = blocks[0];
-			grid.grid[x + 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x + 1][y] = tmp2.blocks[0];
 			tmp.blocks[0].y = y;
-			tmp2.blocks[0].y = y;
 			return true;
 		}
 		return false;
@@ -63,12 +51,18 @@ public class Cshape extends Shape {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
 		if (OutOfBounds(x - 1, y)
-				&& grid.grid[x - 1][y].parent.letter.equals("E")) {
+				&& grid.grid[x - 1][y].parent.letter.equals("E")
+				&& grid.grid[x - 1][y + 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x - 1][y].parent;
+			Eshape tmp2 = (Eshape) grid.grid[x - 1][y + 1].parent;
 			blocks[0].x -= 1;
+			blocks[1].x -= 1;
 			grid.grid[x - 1][y] = blocks[0];
+			grid.grid[x - 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y + 1] = tmp2.blocks[1];
 			tmp.blocks[0].x = x;
+			tmp2.blocks[1].x = x;
 			return true;
 		}
 		return false;
@@ -79,12 +73,18 @@ public class Cshape extends Shape {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
 		if (OutOfBounds(x + 1, y)
-				&& grid.grid[x + 1][y].parent.letter.equals("E")) {
+				&& grid.grid[x + 1][y].parent.letter.equals("E")
+				&& grid.grid[x + 1][y + 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x + 1][y].parent;
+			Eshape tmp2 = (Eshape) grid.grid[x + 1][y + 1].parent;
 			blocks[0].x += 1;
+			blocks[1].x += 1;
 			grid.grid[x + 1][y] = blocks[0];
+			grid.grid[x + 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y + 1] = tmp2.blocks[1];
 			tmp.blocks[0].x = x;
+			tmp2.blocks[1].x = x;
 			return true;
 		}
 		return false;
