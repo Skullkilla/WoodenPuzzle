@@ -128,10 +128,10 @@ public class Dshape extends Shape {
 			
 			Eshape tmp1= (Eshape)grid.grid[x1+1][y1].parent;
 			Eshape tmp2 = (Eshape)grid.grid[x2+1][y2].parent;
-			blocks[0].x -= 1;
-			blocks[1].x -= 1;
-			blocks[2].x -= 1;
-			blocks[3].x -= 1;
+			blocks[0].x += 1;
+			blocks[1].x += 1;
+			blocks[2].x += 1;
+			blocks[3].x += 1;
 			tmp1.blocks[0].x = x1-1;
 			tmp1.blocks[0].y = y1;
 			tmp2.blocks[0].x = x2-1;
