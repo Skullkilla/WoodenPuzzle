@@ -9,19 +9,20 @@ public class Ashape extends Shape {
 		letter = "A";
 	}
 	
-	public boolean IsOutOfBounds(int x, int y){
+	public boolean NotOutOfBounds(int x, int y){
 		if (x < 0 || y<0 || x>grid.width || y>grid.height)
-			return true;
-		else return false;
+			return false;
+		 return true;
 			
 	}
 
 	public boolean MoveUp() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
-		if ( IsOutOfBounds(x,y-1) && grid.grid[x][y-1].parent.letter.equals("E")){
+		if ( NotOutOfBounds(x,y-1) && grid.grid[x][y-1].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x][y-1].parent;
 			blocks[0].y -= 1;
+			tmp.blocks[0].y = y;
 			grid.grid[x][y-1] = blocks[0];
 			grid.grid[x][y] = tmp.blocks[0];
 			return true;
@@ -33,9 +34,10 @@ public class Ashape extends Shape {
 	public boolean MoveDown() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
-		if (IsOutOfBounds(x,y+1) && grid.grid[x][y+1].parent.letter.equals("E")){
+		if (NotOutOfBounds(x,y+1) && grid.grid[x][y+1].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x][y+1].parent;
 			blocks[0].y += 1;
+			tmp.blocks[0].y = y;
 			grid.grid[x][y+1] = blocks[0];
 			grid.grid[x][y] = tmp.blocks[0];
 			return true;
@@ -47,9 +49,10 @@ public class Ashape extends Shape {
 	public boolean MoveLeft() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
-		if (IsOutOfBounds(x-1,y) && grid.grid[x-1][y].parent.letter.equals("E")){
+		if (NotOutOfBounds(x-1,y) && grid.grid[x-1][y].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x-1][y].parent;
 			blocks[0].x -= 1;
+			tmp.blocks[0].x = x;
 			grid.grid[x-1][y]= blocks[0];
 			grid.grid[x][y]=tmp.blocks[0];
 			return true;
@@ -61,9 +64,10 @@ public class Ashape extends Shape {
 	public boolean MoveRight() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
-		if (IsOutOfBounds(x+1,y) && grid.grid[x+1][y].parent.letter.equals("E")){
+		if (NotOutOfBounds(x+1,y) && grid.grid[x+1][y].parent.letter.equals("E")){
 			Eshape tmp = (Eshape)grid.grid[x+1][y].parent;
 			blocks[0].x += 1;
+			tmp.blocks[0].x = x;
 			grid.grid[x+1][y]= blocks[0];
 			grid.grid[x][y]=tmp.blocks[0];
 			return true;

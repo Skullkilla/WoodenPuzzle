@@ -10,7 +10,7 @@ public class Eshape extends Shape {
 		blocks[0] = new Block(x, y, this);
 		letter = "E";
 	}
-
+	
 	//Eshape has no need to move so none of these will ever return true
 	@Override
 	public boolean MoveUp() {
