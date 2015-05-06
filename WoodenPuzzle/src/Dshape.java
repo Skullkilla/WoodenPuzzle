@@ -10,10 +10,10 @@ public class Dshape extends Shape {
 
 	}
 	
-	public boolean IsOutOfBounds(int x, int y){
+	public boolean NotOutOfBounds(int x, int y){
 		if (x < 0 || y<0 || x>grid.width || y>grid.height)
-			return true;
-		 return false;
+			return false;
+		 return true;
 	}
 //comment
 	@Override
@@ -22,9 +22,9 @@ public class Dshape extends Shape {
 		int y1= blocks[0].y;
 		int x2 = blocks[1].x;
 		int y2 = blocks[1].y;
-		if ( IsOutOfBounds(x1,y1-1) 
+		if ( NotOutOfBounds(x1,y1-1) 
 				&& grid.grid[x1][y1-1].parent.letter.equals("E") 
-				&& IsOutOfBounds(x2,y2-1) 
+				&& NotOutOfBounds(x2,y2-1) 
 				&& grid.grid[x2][y2-1].parent.letter.equals("E")){
 			
 			Eshape tmp1= (Eshape)grid.grid[x1][y1-1].parent;
@@ -55,9 +55,9 @@ public class Dshape extends Shape {
 		int y1= blocks[2].y;
 		int x2 = blocks[3].x;
 		int y2 = blocks[3].y;
-		if ( IsOutOfBounds(x1,y1+1) 
+		if ( NotOutOfBounds(x1,y1+1) 
 				&& grid.grid[x1][y1+1].parent.letter.equals("E") 
-				&& IsOutOfBounds(x2,y2+1) 
+				&& NotOutOfBounds(x2,y2+1) 
 				&& grid.grid[x2][y2+1].parent.letter.equals("E")){
 			
 			Eshape tmp1= (Eshape)grid.grid[x1][y1+1].parent;
@@ -88,9 +88,9 @@ public class Dshape extends Shape {
 		int y1= blocks[0].y;
 		int x2 = blocks[2].x;
 		int y2 = blocks[2].y;
-		if ( IsOutOfBounds(x1-1,y1) 
+		if ( NotOutOfBounds(x1-1,y1) 
 				&& grid.grid[x1-1][y1].parent.letter.equals("E") 
-				&& IsOutOfBounds(x2-1,y2) 
+				&& NotOutOfBounds(x2-1,y2) 
 				&& grid.grid[x2-1][y2].parent.letter.equals("E")){
 			
 			Eshape tmp1= (Eshape)grid.grid[x1-1][y1].parent;
@@ -121,9 +121,9 @@ public class Dshape extends Shape {
 		int y1= blocks[1].y;
 		int x2 = blocks[3].x;
 		int y2 = blocks[3].y;
-		if ( IsOutOfBounds(x1+1,y1) 
+		if ( NotOutOfBounds(x1+1,y1) 
 				&& grid.grid[x1+1][y1].parent.letter.equals("E") 
-				&& IsOutOfBounds(x2+1,y2) 
+				&& NotOutOfBounds(x2+1,y2) 
 				&& grid.grid[x2+1][y2].parent.letter.equals("E")){
 			
 			Eshape tmp1= (Eshape)grid.grid[x1+1][y1].parent;
