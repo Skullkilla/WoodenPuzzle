@@ -59,7 +59,6 @@ public class Bshape extends Shape {
 	}
 
 	@Override
-	//THIS NEEDS WORK
 	public boolean MoveLeft() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
@@ -67,8 +66,10 @@ public class Bshape extends Shape {
 				&& grid.grid[x - 1][y].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x - 1][y].parent;
 			blocks[0].x -= 1;
+			blocks[1].x -= 1;
 			grid.grid[x - 1][y] = blocks[0];
-			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y] = blocks[1];
+			grid.grid[x+1][y] = tmp.blocks[0];
 			tmp.blocks[0].x = x;
 			return true;
 		}
@@ -76,7 +77,6 @@ public class Bshape extends Shape {
 	}
 
 	@Override
-	//THIS NEEDS WORK
 	public boolean MoveRight() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
@@ -84,8 +84,10 @@ public class Bshape extends Shape {
 				&& grid.grid[x + 1][y].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x + 1][y].parent;
 			blocks[0].x += 1;
+			blocks[1].x += 1;
 			grid.grid[x + 1][y] = blocks[0];
-			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y] = blocks[1];
+			grid.grid[x-1][y] = tmp.blocks[0];
 			tmp.blocks[0].x = x;
 			return true;
 		}
