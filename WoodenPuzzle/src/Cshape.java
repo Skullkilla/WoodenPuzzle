@@ -23,8 +23,10 @@ public class Cshape extends Shape {
 				&& grid.grid[x][y - 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x][y - 1].parent;
 			blocks[0].y -= 1;
+			blocks[1].y -= 1;
 			grid.grid[x][y - 1] = blocks[0];
-			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y] = blocks[1];
+			grid.grid[x][y+1] = tmp.blocks[0];
 			tmp.blocks[0].y = y;
 			return true;
 		}
@@ -32,7 +34,7 @@ public class Cshape extends Shape {
 	}
 
 	@Override
-	//THIS NEEDS WORK
+	
 	public boolean MoveDown() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
@@ -40,8 +42,10 @@ public class Cshape extends Shape {
 				&& grid.grid[x][y + 1].parent.letter.equals("E")) {
 			Eshape tmp = (Eshape) grid.grid[x][y + 1].parent;
 			blocks[0].y += 1;
+			blocks[1].y += 1;
 			grid.grid[x][y + 1] = blocks[0];
-			grid.grid[x][y] = tmp.blocks[0];
+			grid.grid[x][y] = blocks[1];
+			grid.grid[x][y-1] = tmp.blocks[0];
 			tmp.blocks[0].y = y;
 			return true;
 		}
