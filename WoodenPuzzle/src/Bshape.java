@@ -59,6 +59,7 @@ public class Bshape extends Shape {
 	}
 
 	@Override
+	//THIS NEEDS WORK
 	public boolean MoveLeft() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
@@ -75,6 +76,7 @@ public class Bshape extends Shape {
 	}
 
 	@Override
+	//THIS NEEDS WORK
 	public boolean MoveRight() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;

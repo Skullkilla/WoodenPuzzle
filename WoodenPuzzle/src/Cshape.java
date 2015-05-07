@@ -15,6 +15,7 @@ public class Cshape extends Shape {
 	}
 
 	@Override
+	//THIS NEEDS WORK
 	public boolean MoveUp() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
@@ -31,6 +32,7 @@ public class Cshape extends Shape {
 	}
 
 	@Override
+	//THIS NEEDS WORK
 	public boolean MoveDown() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;

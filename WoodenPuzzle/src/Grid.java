@@ -37,6 +37,10 @@ public class Grid {
 	
 	public void SetConfig(BitSet code) {
 		String[] shapeString = tree.decode(code);
+		SetConfigString(shapeString);
+	}
+	
+	public void SetConfigString(String[] shapeString) {
 		shapes = new Shape[shapeString.length];
 		
 		grid = new Block[width][height];

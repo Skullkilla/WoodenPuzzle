@@ -146,5 +146,10 @@ public class Dshape extends Shape {
 		}
 		return false;
 	}
+	
+	//THIS NEEDS IMPLEMENTATION
+	public boolean isWin() {
+		return false;
+	}
 
 }
