@@ -10,7 +10,7 @@ public class Ashape extends Shape {
 	}
 	
 	public boolean NotOutOfBounds(int x, int y){
-		if (x < 0 || y<0 || x>grid.width || y>grid.height)
+		if (x < 0 || y<0 || x>=grid.width || y>=grid.height)
 			return false;
 		 return true;
 			

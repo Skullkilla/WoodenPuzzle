@@ -9,4 +9,8 @@ public class Block {
 		parent = p;
 	}
 
+	
+	public String toString() {
+		return parent.letter;
+	}
 }

@@ -36,16 +36,19 @@ public class Eshape extends Shape {
 	public Shape[] adjacent() {
 		Shape[] shapes = new Shape[4]; // Max is 4 shapes
 		int shapeIndex = 0;
+		
+		
 		if(blocks[0].y-1 >= 0)
 			shapes[shapeIndex++] = grid.grid[blocks[0].x][blocks[0].y-1].parent; // Up
 		if(blocks[0].y+1 < grid.height)
-			shapes[shapeIndex++] = grid.grid[blocks[0].x][blocks[0].y].parent; // Down
+			shapes[shapeIndex++] = grid.grid[blocks[0].x][blocks[0].y+1].parent; // Down
 		if(blocks[0].x-1 >= 0)
-			shapes[shapeIndex++] = grid.grid[blocks[0].x][blocks[0].y].parent; // Left
+			shapes[shapeIndex++] = grid.grid[blocks[0].x-1][blocks[0].y].parent; // Left
 		if(blocks[0].x+1 < grid.width)
-			shapes[shapeIndex++] = grid.grid[blocks[0].x][blocks[0].y].parent; // Right
+			shapes[shapeIndex++] = grid.grid[blocks[0].x+1][blocks[0].y].parent; // Right
 		
-		System.arraycopy(shapes, 0, shapes, 0, shapeIndex);
+		//System.arraycopy(shapes, 0, shapes, 0, shapeIndex);
+		
 		return shapes;
 	}
 }

@@ -9,7 +9,7 @@ public class Cshape extends Shape {
 	}
 
 	public boolean OutOfBounds(int x, int y) {
-		if (x < 0 || y < 0 || grid.height < 0 || grid.width < 0)
+		if (x < 0 || y < 0 || x >= grid.width || y >= grid.height)
 			return false;
 		return true;
 	}
@@ -38,9 +38,9 @@ public class Cshape extends Shape {
 	public boolean MoveDown() {
 		int x = blocks[0].x;
 		int y = blocks[0].y;
-		if (OutOfBounds(x, y + 1)
-				&& grid.grid[x][y + 1].parent.letter.equals("E")) {
-			Eshape tmp = (Eshape) grid.grid[x][y + 1].parent;
+		if (OutOfBounds(x, y + 2)
+				&& grid.grid[x][y + 2].parent.letter.equals("E")) {
+			Eshape tmp = (Eshape) grid.grid[x][y + 2].parent;
 			blocks[0].y += 1;
 			blocks[1].y += 1;
 			grid.grid[x][y + 1] = blocks[0];
@@ -66,7 +66,7 @@ public class Cshape extends Shape {
 			grid.grid[x - 1][y] = blocks[0];
 			grid.grid[x - 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x][y + 1] = tmp2.blocks[1];
+			grid.grid[x][y + 1] = tmp2.blocks[0];
 			tmp.blocks[0].x = x;
 			tmp2.blocks[1].x = x;
 			return true;
@@ -88,7 +88,7 @@ public class Cshape extends Shape {
 			grid.grid[x + 1][y] = blocks[0];
 			grid.grid[x + 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x][y + 1] = tmp2.blocks[1];
+			grid.grid[x][y + 1] = tmp2.blocks[0];
 			tmp.blocks[0].x = x;
 			tmp2.blocks[1].x = x;
 			return true;

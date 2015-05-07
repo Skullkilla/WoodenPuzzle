@@ -1,6 +1,7 @@
 public class Dshape extends Shape {
 
 	public Dshape(int x, int y, Grid g) {
+		letter = "D";
 		this.grid = g;
 		blocks = new Block[4];
 		blocks[0] = new Block(x, y, this);
@@ -11,7 +12,7 @@ public class Dshape extends Shape {
 	}
 	
 	public boolean NotOutOfBounds(int x, int y){
-		if (x < 0 || y<0 || x>grid.width || y>grid.height)
+		if (x < 0 || y<0 || x>=grid.width || y>=grid.height)
 			return false;
 		 return true;
 	}
@@ -42,7 +43,7 @@ public class Dshape extends Shape {
 			grid.grid[x2][y1-1] = blocks[1];
 			grid.grid[x2][y2]   = blocks[3];
 			grid.grid[x1][y1+1] = tmp1.blocks[0];
-			grid.grid[x1][y2+1] = tmp2.blocks[1];
+			grid.grid[x1][y2+1] = tmp2.blocks[0];
 			return true;
 		}
 		
@@ -75,7 +76,7 @@ public class Dshape extends Shape {
 			grid.grid[x2][y1+1] = blocks[1];
 			grid.grid[x2][y2]   = blocks[3];
 			grid.grid[x1][y1-1] = tmp1.blocks[0];
-			grid.grid[x1][y1-1] = tmp2.blocks[1];
+			grid.grid[x1][y1-1] = tmp2.blocks[0];
 			return true;
 		}
 		
@@ -108,7 +109,7 @@ public class Dshape extends Shape {
 			grid.grid[x1][y1] = blocks[1];
 			grid.grid[x2][y2]   = blocks[3];
 			grid.grid[x1+1][y1] = tmp1.blocks[0];
-			grid.grid[x1+1][y2] = tmp2.blocks[1];
+			grid.grid[x1+1][y2] = tmp2.blocks[0];
 			return true;
 		}
 		
@@ -141,7 +142,7 @@ public class Dshape extends Shape {
 			grid.grid[x2+1][y1] = blocks[3];
 			grid.grid[x2][y2]   = blocks[2];
 			grid.grid[x1-1][y1] = tmp1.blocks[0];
-			grid.grid[x1-1][y2] = tmp2.blocks[1];
+			grid.grid[x1-1][y2] = tmp2.blocks[0];
 			return true;
 		}
 		return false;
