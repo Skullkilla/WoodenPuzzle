@@ -149,6 +149,9 @@ public class Dshape extends Shape {
 	
 	//THIS NEEDS IMPLEMENTATION
 	public boolean isWin() {
+		if (blocks[0].x == 3 && blocks[0].y == 1) {
+			return true;
+		}
 		return false;
 	}
 
