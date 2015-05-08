@@ -35,25 +35,31 @@ public class Solver {
 		// Add to queue and hashtable
 		queue.add(initialNode);
 		hashtable.put(initialNode.configuration, 1);
+		
+		grid.PrintGrid();
 
 		// Start Queue Loop
-		exitWhile: while (!queue.isEmpty()) {
+		while (!queue.isEmpty()) {
 			// Grab and set next Config
 			ConfigurationNode currentNode = queue.poll();
 			grid.SetConfig(currentNode.configuration);
 
 			// Check Win and Grab Empties
 			emptyIndex = 0;
+			empties = new Eshape[2];
 			for (Shape s : grid.shapes) {
 				if (s.letter.equals("D")) {
 					if (((Dshape) s).isWin()) {
 						winNode = currentNode;
-						break exitWhile;
+						queue.clear();
 					}
 				} else if (s.letter.equals("E")) {
 					empties[emptyIndex++] = (Eshape) s;
 				}
 			}
+			
+			if(winNode != null)
+				break;
 			
 			System.out.println("New CONFIG FROM QUEUEEUEUEUE");
 
@@ -63,64 +69,73 @@ public class Solver {
 					//grid.PrintGrid();
 					for (Shape s : e.adjacent()) {
 						if (s != null) {
-							System.out.println(s.letter);
+							//System.out.println(s.letter);
 							int x = s.blocks[0].x;
 							int y = s.blocks[0].y;
+							grid.SetConfig(currentNode.configuration);
 							if (s.MoveUp()) {
 								System.out.println("Move Up - "+s.letter);
 								if (!hashtable.containsKey(grid.GetConfig())) {
-									System.out.println("Succes");
+									//System.out.println("Succes");
 									ConfigurationNode newNode = new ConfigurationNode(
 											grid.GetConfig(), currentNode, 0,
 											x, y);
 									queue.add(newNode);
 									hashtable.put(newNode.configuration, 1);
-									grid.PrintGrid();
+									if(s.letter.equals("D"))
+										grid.PrintGrid();
 								}
 								grid.SetConfig(currentNode.configuration);
-								grid.PrintGrid();
+								if(s.letter.equals("D"))
+									grid.PrintGrid();
 							}
 							if (s.MoveDown()) {
-								System.out.println("Move DOwn - "+s.letter);
+								System.out.println("Move Down - "+s.letter);
 								if (!hashtable.containsKey(grid.GetConfig())) {
-									System.out.println("Success");
+									//System.out.println("Success");
 									ConfigurationNode newNode = new ConfigurationNode(
 											grid.GetConfig(), currentNode, 1,
 											x, y);
 									queue.add(newNode);
 									hashtable.put(newNode.configuration, 1);
-									grid.PrintGrid();
+									if(s.letter.equals("D"))
+										grid.PrintGrid();
 								}
 								grid.SetConfig(currentNode.configuration);
-								grid.PrintGrid();
+								if(s.letter.equals("D"))
+									grid.PrintGrid();
 							}
 							if (s.MoveLeft()) {
 								System.out.println("Move Left - "+s.letter);
 								if (!hashtable.containsKey(grid.GetConfig())) {
-									System.out.println("Success");
+									//System.out.println("Success");
 									ConfigurationNode newNode = new ConfigurationNode(
 											grid.GetConfig(), currentNode, 2,
 											x, y);
 									queue.add(newNode);
 									hashtable.put(newNode.configuration, 1);
-									grid.PrintGrid();
+									if(s.letter.equals("D"))
+										grid.PrintGrid();
 								}
 								grid.SetConfig(currentNode.configuration);
-								grid.PrintGrid();
+								if(s.letter.equals("D"))
+									grid.PrintGrid();
 							}
 							if (s.MoveRight()) {
 								System.out.println("Move Right - "+s.letter);
 								if (!hashtable.containsKey(grid.GetConfig())) {
-									System.out.println("Success");
+									//System.out.println("Success");
 									ConfigurationNode newNode = new ConfigurationNode(
 											grid.GetConfig(), currentNode, 3,
 											x, y);
 									queue.add(newNode);
 									hashtable.put(newNode.configuration, 1);
-									grid.PrintGrid();
+									if(s.letter.equals("D"))
+										grid.PrintGrid();
 								}
 								grid.SetConfig(currentNode.configuration);
-								grid.PrintGrid();
+								if(s.letter.equals("D"))
+									grid.PrintGrid();
 							}
 						}
 					}
@@ -153,6 +168,7 @@ public class Solver {
 						+ current.pieceY + ")one unit Right");
 				break;
 			}
+			current = current.previousConfig;
 
 		}
 		// Print

@@ -24,10 +24,10 @@ public class Cshape extends Shape {
 			Eshape tmp = (Eshape) grid.grid[x][y - 1].parent;
 			blocks[0].y -= 1;
 			blocks[1].y -= 1;
+			tmp.blocks[0].y = y + 1;
 			grid.grid[x][y - 1] = blocks[0];
 			grid.grid[x][y] = blocks[1];
 			grid.grid[x][y+1] = tmp.blocks[0];
-			tmp.blocks[0].y = y;
 			return true;
 		}
 		return false;
@@ -43,10 +43,10 @@ public class Cshape extends Shape {
 			Eshape tmp = (Eshape) grid.grid[x][y + 2].parent;
 			blocks[0].y += 1;
 			blocks[1].y += 1;
-			grid.grid[x][y + 1] = blocks[0];
-			grid.grid[x][y] = blocks[1];
-			grid.grid[x][y-1] = tmp.blocks[0];
 			tmp.blocks[0].y = y;
+			grid.grid[x][y + 1] = blocks[0];
+			grid.grid[x][y + 2] = blocks[1];
+			grid.grid[x][y] = tmp.blocks[0];
 			return true;
 		}
 		return false;
@@ -63,12 +63,12 @@ public class Cshape extends Shape {
 			Eshape tmp2 = (Eshape) grid.grid[x - 1][y + 1].parent;
 			blocks[0].x -= 1;
 			blocks[1].x -= 1;
+			tmp.blocks[0].x = x;
+			tmp2.blocks[0].x = x;
 			grid.grid[x - 1][y] = blocks[0];
 			grid.grid[x - 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
 			grid.grid[x][y + 1] = tmp2.blocks[0];
-			tmp.blocks[0].x = x;
-			tmp2.blocks[1].x = x;
 			return true;
 		}
 		return false;
@@ -85,12 +85,12 @@ public class Cshape extends Shape {
 			Eshape tmp2 = (Eshape) grid.grid[x + 1][y + 1].parent;
 			blocks[0].x += 1;
 			blocks[1].x += 1;
+			tmp.blocks[0].x = x;
+			tmp2.blocks[0].x = x;
 			grid.grid[x + 1][y] = blocks[0];
 			grid.grid[x + 1][y + 1] = blocks[1];
 			grid.grid[x][y] = tmp.blocks[0];
 			grid.grid[x][y + 1] = tmp2.blocks[0];
-			tmp.blocks[0].x = x;
-			tmp2.blocks[1].x = x;
 			return true;
 		}
 		return false;

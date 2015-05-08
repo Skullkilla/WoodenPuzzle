@@ -69,7 +69,7 @@ public class Ashape extends Shape {
 			blocks[0].x += 1;
 			tmp.blocks[0].x = x;
 			grid.grid[x+1][y]= blocks[0];
-			grid.grid[x][y]=tmp.blocks[0];
+			grid.grid[x][y] = tmp.blocks[0];
 			return true;
 		}
 		
