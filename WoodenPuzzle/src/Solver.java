@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 public class Solver {
 	private Queue<ConfigurationNode> queue;
-	private HashMap<BitSet, Integer> hashtable;
+	private HashMap<Configuration, Integer> hashtable;
 	private Grid grid;
 
 	public Solver() {
 		// Initialize
 		grid = new Grid(5, 4);
 		queue = new LinkedList<ConfigurationNode>();
-		hashtable = new HashMap<BitSet, Integer>();
+		hashtable = new HashMap<Configuration, Integer>();
 		ConfigurationNode winNode = null;
 		Eshape[] empties = new Eshape[2];
 		int emptyIndex = 0;
@@ -27,6 +27,7 @@ public class Solver {
 		String initialConfig = input.nextLine();
 		
 
+		long timer = System.currentTimeMillis();
 		// Set Config
 		grid.SetConfigString(initialConfig.split(" "));
 		ConfigurationNode initialNode = new ConfigurationNode(grid.GetConfig(),
@@ -34,21 +35,24 @@ public class Solver {
 
 		// Add to queue and hashtable
 		queue.add(initialNode);
-		hashtable.put(initialNode.configuration, 1);
+		hashtable.put(new Configuration(initialNode.configuration), 1);
 		
-		grid.PrintGrid();
+		//grid.PrintGrid();
 
 		// Start Queue Loop
 		while (!queue.isEmpty()) {
 			// Grab and set next Config
 			ConfigurationNode currentNode = queue.poll();
 			grid.SetConfig(currentNode.configuration);
-
+			
+			
 			// Check Win and Grab Empties
 			emptyIndex = 0;
 			empties = new Eshape[2];
 			for (Shape s : grid.shapes) {
 				if (s.letter.equals("D")) {
+					//System.out.println("WIn CHECK MOTHER FUCKER");
+					//grid.PrintGrid();
 					if (((Dshape) s).isWin()) {
 						winNode = currentNode;
 						queue.clear();
@@ -58,90 +62,76 @@ public class Solver {
 				}
 			}
 			
+			//System.out.println("Emties: "+emptyIndex);
+			
 			if(winNode != null)
 				break;
 			
-			System.out.println("New CONFIG FROM QUEUEEUEUEUE");
+			//System.out.println("New CONFIG FROM QUEUEEUEUEUE");
 
 			// Do Moves
 			for (Eshape e : empties) {
 				if (e != null) {
 					//grid.PrintGrid();
-					for (Shape s : e.adjacent()) {
+					grid.SetConfig(currentNode.configuration);
+					Shape[] adjacent = e.adjacent();
+					for (Shape s : adjacent) {
 						if (s != null) {
-							//System.out.println(s.letter);
 							int x = s.blocks[0].x;
 							int y = s.blocks[0].y;
-							grid.SetConfig(currentNode.configuration);
 							if (s.MoveUp()) {
-								System.out.println("Move Up - "+s.letter);
-								if (!hashtable.containsKey(grid.GetConfig())) {
-									//System.out.println("Succes");
+								Configuration newCon = new Configuration(grid.GetConfig());
+								if (!hashtable.containsKey(newCon)) {
 									ConfigurationNode newNode = new ConfigurationNode(
-											grid.GetConfig(), currentNode, 0,
+											newCon.configuration, currentNode, 0,
 											x, y);
 									queue.add(newNode);
-									hashtable.put(newNode.configuration, 1);
-									if(s.letter.equals("D"))
-										grid.PrintGrid();
+									hashtable.put(newCon, 1);
 								}
-								grid.SetConfig(currentNode.configuration);
-								if(s.letter.equals("D"))
-									grid.PrintGrid();
 							}
+							grid.SetConfig(currentNode.configuration);
+							s = grid.grid[x][y].parent;
 							if (s.MoveDown()) {
-								System.out.println("Move Down - "+s.letter);
-								if (!hashtable.containsKey(grid.GetConfig())) {
-									//System.out.println("Success");
+								Configuration newCon = new Configuration(grid.GetConfig());
+								if (!hashtable.containsKey(newCon)) {
 									ConfigurationNode newNode = new ConfigurationNode(
-											grid.GetConfig(), currentNode, 1,
+											newCon.configuration, currentNode, 1,
 											x, y);
 									queue.add(newNode);
-									hashtable.put(newNode.configuration, 1);
-									if(s.letter.equals("D"))
-										grid.PrintGrid();
+									hashtable.put(newCon, 1);
 								}
-								grid.SetConfig(currentNode.configuration);
-								if(s.letter.equals("D"))
-									grid.PrintGrid();
 							}
+							grid.SetConfig(currentNode.configuration);
+							s = grid.grid[x][y].parent;
 							if (s.MoveLeft()) {
-								System.out.println("Move Left - "+s.letter);
-								if (!hashtable.containsKey(grid.GetConfig())) {
-									//System.out.println("Success");
+								Configuration newCon = new Configuration(grid.GetConfig());
+								if (!hashtable.containsKey(newCon)) {
 									ConfigurationNode newNode = new ConfigurationNode(
-											grid.GetConfig(), currentNode, 2,
+											newCon.configuration, currentNode, 2,
 											x, y);
 									queue.add(newNode);
-									hashtable.put(newNode.configuration, 1);
-									if(s.letter.equals("D"))
-										grid.PrintGrid();
+									hashtable.put(newCon, 1);
 								}
-								grid.SetConfig(currentNode.configuration);
-								if(s.letter.equals("D"))
-									grid.PrintGrid();
 							}
+							grid.SetConfig(currentNode.configuration);
+							s = grid.grid[x][y].parent;
 							if (s.MoveRight()) {
-								System.out.println("Move Right - "+s.letter);
-								if (!hashtable.containsKey(grid.GetConfig())) {
-									//System.out.println("Success");
+								Configuration newCon = new Configuration(grid.GetConfig());
+								if (!hashtable.containsKey(newCon)) {
 									ConfigurationNode newNode = new ConfigurationNode(
-											grid.GetConfig(), currentNode, 3,
+											newCon.configuration, currentNode, 3,
 											x, y);
 									queue.add(newNode);
-									hashtable.put(newNode.configuration, 1);
-									if(s.letter.equals("D"))
-										grid.PrintGrid();
+									hashtable.put(newCon, 1);
 								}
-								grid.SetConfig(currentNode.configuration);
-								if(s.letter.equals("D"))
-									grid.PrintGrid();
 							}
 						}
 					}
 				}
 			}
 		}
+		
+		long totalTime = System.currentTimeMillis() - timer;
 
 		// Traverse
 		ArrayList<String> list = new ArrayList<String>();
@@ -171,26 +161,65 @@ public class Solver {
 			current = current.previousConfig;
 
 		}
+		
+		
+		
 		// Print
 		for (int i = list.size() - 1; i >= 0; i--)
 			System.out.println(list.get(i));
 
 		System.out.println(list.size());
+		
+		System.out.println("Total Time: "+totalTime);
 	}
 
 	protected class ConfigurationNode {
 		ConfigurationNode previousConfig;
-		BitSet configuration;
+		Boolean[] configuration;
 		int move; // Up = 0, Down = 1, Left = 2, Right = 3
 		int pieceX, pieceY;
 
-		public ConfigurationNode(BitSet c, ConfigurationNode n, int m, int x,
+		public ConfigurationNode(Boolean[] c, ConfigurationNode n, int m, int x,
 				int y) {
 			configuration = c;
 			previousConfig = n;
 			move = m;
 			pieceX = x;
 			pieceY = y;
+		}
+	}
+	
+	protected class Configuration implements Comparable<Configuration>{
+		Boolean[] configuration;
+		
+		public Configuration(Boolean[] c) {
+			configuration = c;
+		}
+		
+		@Override
+		public int compareTo(Configuration o) {
+			if(o.configuration.length != configuration.length)
+				return -1;
+			for(int i = 0; i < configuration.length; i++) {
+				if(o.configuration[i].booleanValue() != configuration[i].booleanValue())
+					return -1;
+			}
+			return 0;
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			return compareTo((Configuration)o) == 0;
+		}
+		
+		@Override
+		public int hashCode() {
+	        long hashVal = 17;
+	           
+	        for(int i=configuration.length-1; i >= 0; i--) 
+	             hashVal = hashVal * 23 + configuration[i].hashCode(); 
+	        hashVal &= 0x000000007FFFFFF;     
+	        return (int) (hashVal);
 		}
 	}
 

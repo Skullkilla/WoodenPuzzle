@@ -14,5 +14,4 @@ public abstract class Shape {
 	public boolean isUpperLeft(Block b) {
 		return b.x == blocks[0].x && b.y == blocks[0].y;
 	}
-
 }

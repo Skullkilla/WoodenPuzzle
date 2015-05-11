@@ -54,21 +54,23 @@ public class Cshape extends Shape {
 
 	@Override
 	public boolean MoveLeft() {
-		int x = blocks[0].x;
-		int y = blocks[0].y;
-		if (OutOfBounds(x - 1, y)
-				&& grid.grid[x - 1][y].parent.letter.equals("E")
-				&& grid.grid[x - 1][y + 1].parent.letter.equals("E")) {
-			Eshape tmp = (Eshape) grid.grid[x - 1][y].parent;
-			Eshape tmp2 = (Eshape) grid.grid[x - 1][y + 1].parent;
+		int x0 = blocks[0].x;
+		int y0 = blocks[0].y;
+		int x1 = blocks[1].x;
+		int y1 = blocks[1].y;
+		if (OutOfBounds(x0 - 1, y0)
+				&& grid.grid[x0 - 1][y0].parent.letter.equals("E")
+				&& grid.grid[x1 - 1][y1].parent.letter.equals("E")) {
+			Eshape tmp = (Eshape) grid.grid[x0 - 1][y0].parent;
+			Eshape tmp2 = (Eshape) grid.grid[x1 - 1][y1].parent;
 			blocks[0].x -= 1;
 			blocks[1].x -= 1;
-			tmp.blocks[0].x = x;
-			tmp2.blocks[0].x = x;
-			grid.grid[x - 1][y] = blocks[0];
-			grid.grid[x - 1][y + 1] = blocks[1];
-			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x][y + 1] = tmp2.blocks[0];
+			tmp.blocks[0].x = x0;
+			tmp2.blocks[0].x = x1;
+			grid.grid[x0 - 1][y0] = blocks[0];
+			grid.grid[x1 - 1][y1] = blocks[1];
+			grid.grid[x0][y0] = tmp.blocks[0];
+			grid.grid[x1][y1] = tmp2.blocks[0];
 			return true;
 		}
 		return false;
@@ -76,21 +78,23 @@ public class Cshape extends Shape {
 
 	@Override
 	public boolean MoveRight() {
-		int x = blocks[0].x;
-		int y = blocks[0].y;
-		if (OutOfBounds(x + 1, y)
-				&& grid.grid[x + 1][y].parent.letter.equals("E")
-				&& grid.grid[x + 1][y + 1].parent.letter.equals("E")) {
-			Eshape tmp = (Eshape) grid.grid[x + 1][y].parent;
-			Eshape tmp2 = (Eshape) grid.grid[x + 1][y + 1].parent;
+		int x0 = blocks[0].x;
+		int y0 = blocks[0].y;
+		int x1 = blocks[1].x;
+		int y1 = blocks[1].y;
+		if (OutOfBounds(x0 + 1, y0)
+				&& grid.grid[x0 + 1][y0].parent.letter.equals("E")
+				&& grid.grid[x1 + 1][y1].parent.letter.equals("E")) {
+			Eshape tmp = (Eshape) grid.grid[x0 + 1][y0].parent;
+			Eshape tmp2 = (Eshape) grid.grid[x1 + 1][y1].parent;
 			blocks[0].x += 1;
 			blocks[1].x += 1;
-			tmp.blocks[0].x = x;
-			tmp2.blocks[0].x = x;
-			grid.grid[x + 1][y] = blocks[0];
-			grid.grid[x + 1][y + 1] = blocks[1];
-			grid.grid[x][y] = tmp.blocks[0];
-			grid.grid[x][y + 1] = tmp2.blocks[0];
+			tmp.blocks[0].x = x0;
+			tmp2.blocks[0].x = x1;
+			grid.grid[x0 + 1][y0] = blocks[0];
+			grid.grid[x1 + 1][y1] = blocks[1];
+			grid.grid[x0][y0] = tmp.blocks[0];
+			grid.grid[x1][y1] = tmp2.blocks[0];
 			return true;
 		}
 		return false;

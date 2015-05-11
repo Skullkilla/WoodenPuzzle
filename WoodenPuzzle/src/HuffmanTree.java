@@ -72,17 +72,22 @@ public class HuffmanTree<E> {
 		return -1;
 	}
 	
-	public BitSet encode(E[] dataSequence) {
-		BitSet encodedData = new BitSet(26);
+	public Boolean[] encode(E[] dataSequence) {
+		Boolean[] encodedData = new Boolean[dataSequence.length * 8];
 		int encodedBits = 0;
-		for(int dataSequenceIndex = 0; dataSequenceIndex < dataSequence.length;dataSequenceIndex++) {
+		for(int dataSequenceIndex = 0; dataSequenceIndex < dataSequence.length; dataSequenceIndex++) {
 			String path = PathToNode(dataSequence[dataSequenceIndex], queue[0], "");
 			for(int pathIndex = 0; pathIndex < path.length(); pathIndex++) {
 				if(path.substring(pathIndex, pathIndex+1).equals("1"))
-					encodedData.set(encodedBits);
+					encodedData[encodedBits] = true;
+				else if(path.substring(pathIndex, pathIndex+1).equals("0"))
+					encodedData[encodedBits] = false;
 				encodedBits++;
 			}
 		}
+		
+		encodedData = Arrays.copyOf(encodedData, encodedBits);
+
 		return encodedData;
 	}
 	
@@ -105,13 +110,13 @@ public class HuffmanTree<E> {
 		return path + ((left.length() > 0)?("0"+left):("")) + ((right.length() > 0)?("1"+right):(""));
 	}
 	
-	public E[] decode(BitSet dataBits) {
-		E[] dataSequence = (E[]) Array.newInstance(c, 26);
+	public E[] decode(Boolean[] dataBits) {
+		E[] dataSequence = (E[]) Array.newInstance(c, dataBits.length);
 		int sequenceLength = 0;
-		for(int bitIndex = 0; bitIndex < 26; bitIndex++) {
+		for(int bitIndex = 0; bitIndex < dataSequence.length; bitIndex++) {
 			Node<E> currentNode = queue[0]; //Root of tree
 			while(currentNode != null && currentNode.leafValue == null) {
-				if(dataBits.get(bitIndex))
+				if(dataBits[bitIndex].booleanValue())
 					currentNode = currentNode.right;
 				else
 					currentNode = currentNode.left;

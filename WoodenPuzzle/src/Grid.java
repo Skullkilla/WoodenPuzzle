@@ -35,11 +35,11 @@ public class Grid {
 		return config;
 	}
 
-	public BitSet GetConfig() {
+	public Boolean[] GetConfig() {
 		return tree.encode(GetConfigString().split(" "));
 	}
 
-	public void SetConfig(BitSet code) {
+	public void SetConfig(Boolean[] code) {
 		String[] shapeString = tree.decode(code);
 		SetConfigString(shapeString);
 	}

@@ -19,29 +19,31 @@ public class Dshape extends Shape {
 //comment
 	@Override
 	public boolean MoveUp() {
-		int x1 = blocks[0].x;
-		int y1= blocks[0].y;
-		int x2 = blocks[1].x;
-		int y2 = blocks[1].y;
-		if ( NotOutOfBounds(x1,y1-1) 
-				&& grid.grid[x1][y1-1].parent.letter.equals("E") 
-				&& NotOutOfBounds(x2,y2-1) 
-				&& grid.grid[x2][y2-1].parent.letter.equals("E")){
+		int x0 = blocks[0].x;
+		int y0= blocks[0].y;
+		int x1 = blocks[1].x;
+		int y1 = blocks[1].y;
+		if ( NotOutOfBounds(x0,y0-1) 
+				&& grid.grid[x0][y0-1].parent.letter.equals("E") 
+				&& NotOutOfBounds(x1,y1-1) 
+				&& grid.grid[x1][y1-1].parent.letter.equals("E")){
 			
-			Eshape tmp1= (Eshape)grid.grid[x1][y1-1].parent;
-			Eshape tmp2 = (Eshape)grid.grid[x2][y2-1].parent;
+			Eshape tmp1= (Eshape)grid.grid[x0][y0-1].parent;
+			Eshape tmp2 = (Eshape)grid.grid[x1][y1-1].parent;
 			blocks[0].y -= 1;
 			blocks[1].y -= 1;
 			blocks[2].y -= 1;
 			blocks[3].y -= 1;
-			tmp1.blocks[0].y = y1+1;
-			tmp2.blocks[0].y = y2+1;
-			grid.grid[x1][y1-1] = blocks[0];
-			grid.grid[x2][y1-1] = blocks[1];
-			grid.grid[x1][y1]   = blocks[2];
-			grid.grid[x2][y2]   = blocks[3];
-			grid.grid[x1][y1+1] = tmp1.blocks[0];
-			grid.grid[x2][y2+1] = tmp2.blocks[0];
+			tmp1.blocks[0].y = y0+1;
+			tmp2.blocks[0].y = y1+1;
+			grid.grid[x0][y0-1] = blocks[0];
+			grid.grid[x1][y1-1] = blocks[1];
+			
+			grid.grid[x0][y0]   = blocks[2];
+			grid.grid[x1][y1]   = blocks[3];
+			
+			grid.grid[x0][y0+1] = tmp1.blocks[0];
+			grid.grid[x1][y1+1] = tmp2.blocks[0];
 			return true;
 		}
 		
@@ -50,29 +52,29 @@ public class Dshape extends Shape {
 
 	@Override
 	public boolean MoveDown() {
-		int x1 = blocks[2].x;
-		int y1 = blocks[2].y;
-		int x2 = blocks[3].x;
-		int y2 = blocks[3].y;
-		if ( NotOutOfBounds(x1,y1+1) 
-				&& grid.grid[x1][y1+1].parent.letter.equals("E") 
-				&& NotOutOfBounds(x2,y2+1) 
-				&& grid.grid[x2][y2+1].parent.letter.equals("E")){
+		int x2 = blocks[2].x;
+		int y2 = blocks[2].y;
+		int x3 = blocks[3].x;
+		int y3 = blocks[3].y;
+		if ( NotOutOfBounds(x2,y2+1) 
+				&& grid.grid[x2][y2+1].parent.letter.equals("E") 
+				&& NotOutOfBounds(x3,y3+1) 
+				&& grid.grid[x3][y3+1].parent.letter.equals("E")){
 			
-			Eshape tmp1= (Eshape)grid.grid[x1][y1+1].parent;
-			Eshape tmp2 = (Eshape)grid.grid[x2][y2+1].parent;
+			Eshape tmp1= (Eshape)grid.grid[x2][y2+1].parent;
+			Eshape tmp2 = (Eshape)grid.grid[x3][y3+1].parent;
 			blocks[0].y += 1;
 			blocks[1].y += 1;
 			blocks[2].y += 1;
 			blocks[3].y += 1;
-			tmp1.blocks[0].y = y1-1;
-			tmp2.blocks[0].y = y2-1;
-			grid.grid[x1][y1+1] = blocks[0];
-			grid.grid[x2][y1+1] = blocks[1];
-			grid.grid[x1][y1]   = blocks[2];
-			grid.grid[x2][y2]   = blocks[3];
-			grid.grid[x1][y1-1] = tmp1.blocks[0];
-			grid.grid[x2][y1-1] = tmp2.blocks[0];
+			tmp1.blocks[0].y = y2-1;
+			tmp2.blocks[0].y = y3-1;
+			grid.grid[x2][y2] = blocks[0];
+			grid.grid[x3][y3] = blocks[1];
+			grid.grid[x2][y2+1]   = blocks[2];
+			grid.grid[x3][y3+1]   = blocks[3];
+			grid.grid[x2][y2-1] = tmp1.blocks[0];
+			grid.grid[x3][y3-1] = tmp2.blocks[0];
 			return true;
 		}
 		
@@ -81,28 +83,28 @@ public class Dshape extends Shape {
 
 	@Override
 	public boolean MoveLeft() {
-		int x1 = blocks[0].x;
-		int y1= blocks[0].y;
+		int x0 = blocks[0].x;
+		int y0 = blocks[0].y;
 		int x2 = blocks[2].x;
 		int y2 = blocks[2].y;
-		if ( NotOutOfBounds(x1-1,y1) 
-				&& grid.grid[x1-1][y1].parent.letter.equals("E") 
+		if ( NotOutOfBounds(x0-1,y0) 
+				&& grid.grid[x0-1][y0].parent.letter.equals("E") 
 				&& NotOutOfBounds(x2-1,y2) 
 				&& grid.grid[x2-1][y2].parent.letter.equals("E")){
 			
-			Eshape tmp1= (Eshape)grid.grid[x1-1][y1].parent;
+			Eshape tmp1= (Eshape)grid.grid[x0-1][y0].parent;
 			Eshape tmp2 = (Eshape)grid.grid[x2-1][y2].parent;
 			blocks[0].x -= 1;
 			blocks[1].x -= 1;
 			blocks[2].x -= 1;
 			blocks[3].x -= 1;
-			tmp1.blocks[0].x = x1+1;
+			tmp1.blocks[0].x = x0+1;
 			tmp2.blocks[0].x = x2+1;
-			grid.grid[x1-1][y1] = blocks[0];
-			grid.grid[x1][y1] = blocks[1];
+			grid.grid[x0-1][y0] = blocks[0];
+			grid.grid[x0][y0] = blocks[1];
 			grid.grid[x2-1][y2] = blocks[2];
 			grid.grid[x2][y2] = blocks[3];
-			grid.grid[x1+1][y1] = tmp1.blocks[0];
+			grid.grid[x0+1][y0] = tmp1.blocks[0];
 			grid.grid[x2+1][y2] = tmp2.blocks[0];
 			return true;
 		}
@@ -113,28 +115,28 @@ public class Dshape extends Shape {
 	@Override
 	public boolean MoveRight() {
 		int x1 = blocks[1].x;
-		int y1= blocks[1].y;
-		int x2 = blocks[3].x;
-		int y2 = blocks[3].y;
+		int y1 = blocks[1].y;
+		int x3 = blocks[3].x;
+		int y3 = blocks[3].y;
 		if ( NotOutOfBounds(x1+1,y1) 
 				&& grid.grid[x1+1][y1].parent.letter.equals("E") 
-				&& NotOutOfBounds(x2+1,y2) 
-				&& grid.grid[x2+1][y2].parent.letter.equals("E")){
+				&& NotOutOfBounds(x3+1,y3) 
+				&& grid.grid[x3+1][y3].parent.letter.equals("E")){
 			
 			Eshape tmp1= (Eshape)grid.grid[x1+1][y1].parent;
-			Eshape tmp2 = (Eshape)grid.grid[x2+1][y2].parent;
+			Eshape tmp2 = (Eshape)grid.grid[x3+1][y3].parent;
 			blocks[0].x += 1;
 			blocks[1].x += 1;
 			blocks[2].x += 1;
 			blocks[3].x += 1;
 			tmp1.blocks[0].x = x1-1;
-			tmp2.blocks[0].x = x2-1;
+			tmp2.blocks[0].x = x3-1;
 			grid.grid[x1][y1]   = blocks[0];
 			grid.grid[x1+1][y1] = blocks[1];
-			grid.grid[x2][y2]   = blocks[2];
-			grid.grid[x2+1][y2] = blocks[3];
+			grid.grid[x3][y3]   = blocks[2];
+			grid.grid[x3+1][y3] = blocks[3];
 			grid.grid[x1-1][y1] = tmp1.blocks[0];
-			grid.grid[x2-1][y2] = tmp2.blocks[0];
+			grid.grid[x3-1][y3] = tmp2.blocks[0];
 			return true;
 		}
 		return false;
