@@ -6,6 +6,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/*
+ * B B A D C A E A E B B A - 116 moves
+ * A B B C E A B B D A E A - 7 moves
+ * E B D B A E B C A B A A - 9 moves
+ */
+
 public class Solver {
 	private Queue<ConfigurationNode> queue;
 	private HashMap<Configuration, Integer> hashtable;
@@ -23,10 +29,9 @@ public class Solver {
 		// Get User Input
 		Scanner input = new Scanner(System.in);
 		System.out
-				.println("Input the initial configuration as a string of letters with no white space: ");
+				.println("Input the initial configuration as a string of letters separated by a space: ");
 		String initialConfig = input.nextLine();
 		
-
 		long timer = System.currentTimeMillis();
 		// Set Config
 		grid.SetConfigString(initialConfig.split(" "));
@@ -36,8 +41,6 @@ public class Solver {
 		// Add to queue and hashtable
 		queue.add(initialNode);
 		hashtable.put(new Configuration(initialNode.configuration), 1);
-		
-		//grid.PrintGrid();
 
 		// Start Queue Loop
 		while (!queue.isEmpty()) {
@@ -62,13 +65,10 @@ public class Solver {
 				}
 			}
 			
-			//System.out.println("Emties: "+emptyIndex);
 			
 			if(winNode != null)
 				break;
 			
-			//System.out.println("New CONFIG FROM QUEUEEUEUEUE");
-
 			// Do Moves
 			for (Eshape e : empties) {
 				if (e != null) {
@@ -125,6 +125,7 @@ public class Solver {
 									hashtable.put(newCon, 1);
 								}
 							}
+							grid.SetConfig(currentNode.configuration);
 						}
 					}
 				}
@@ -137,6 +138,8 @@ public class Solver {
 		ArrayList<String> list = new ArrayList<String>();
 		ConfigurationNode current = winNode;
 		while (current != null) {
+			grid.SetConfig(current.configuration);
+			grid.PrintGrid();
 			switch (current.move) {
 			case 0:
 				list.add("Move Piece at (" + current.pieceX + ","
